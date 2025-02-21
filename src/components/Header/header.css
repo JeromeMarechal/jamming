@@ -1,0 +1,45 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    flex-direction: row;
+    box-sizing: border-box;
+    background-color: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.headerButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    gap: 0.5vw;
+}
+
+.login-btn, .signin-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    font-weight: solid;
+    cursor: pointer;
+    transition: all 0.35 ease-in-out;
+}
+
+.login-btn, .signin-btn {
+    background-color: #1DB954; 
+    color: black;
+}
+
+login-btn:hover {
+    background-color: #18a34d;
+}
+
+.signup-btn:hover {
+    background-color: #1DB954;
+    color: white;
+}
