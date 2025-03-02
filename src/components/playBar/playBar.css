@@ -1,0 +1,49 @@
+.play-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    bottom: 1vh;
+    width: 100vw;
+    height: 5vh;
+    padding: 10px;
+    background-color:  rgba(18, 18, 18, 0.3);
+    color: whitesmoke;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 20px rgba(0, 0, 0, 0.19);
+    transform: perspective(1000px) rotateX(5deg);
+}
+
+.track-info {
+    text-align: left;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    width: 40%;
+    gap: 2vw;
+    margin-left: 1vw; ;
+    padding: 0.5vw;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 10%;
+    gap: 1vw;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.progress-bar {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    width: 40%;
+    height: 5px;
+    margin-right: 1vw;
+}

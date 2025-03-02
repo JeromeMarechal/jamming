@@ -13,15 +13,25 @@
     backdrop-filter: blur(5px);
 }
 
-.headerButtons {
+.user-name {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    gap: 0.5vw;
+    justify-content: center;
+    width: 50%;
 }
 
-.login-btn, .signin-btn {
+.app-name {
+    display: flex;
+    justify-content: left;
+    width: 25%;
+}
+
+.header-btn {
+    display: flex;
+    justify-content: right;
+    width: 25%;
+}
+
+.login-btn {
     padding: 10px 16px;
     border: none;
     border-radius: 20px;
@@ -30,16 +40,11 @@
     transition: all 0.35 ease-in-out;
 }
 
-.login-btn, .signin-btn {
-    background-color: #1DB954; 
+.login-btn {
+    background-color: #1DB954;
     color: black;
 }
 
-login-btn:hover {
+.login-btn:hover {
     background-color: #18a34d;
-}
-
-.signup-btn:hover {
-    background-color: #1DB954;
-    color: white;
 }
