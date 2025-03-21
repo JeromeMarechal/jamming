@@ -1,1 +1,1 @@
-the access token has been passed correctly, however the rendering of thus songs are not being displayed properly. 
+In work, the import playlist, should we keep it as it is in the playlist or move it to the result container in order to display the playlist's items in the playlist container or even creating a temporary container for thus ??

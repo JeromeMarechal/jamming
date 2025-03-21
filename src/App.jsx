@@ -8,9 +8,13 @@ import ListContainer from './components/listContainer/listContainer.jsx';
 import PlayBar from './components/playBar/playBar.jsx';
 
 function App() {
+  const key ="b0b41f96952848a6a80957d528a0faa5"; 
   const [profile, setProfile] = useState(null);
+  const [userId, setUserId] = useState(''); 
   const [accessToken, setAccessToken] = useState(''); 
   const [songs, setSongs] = useState([]);
+  const [playlist, setPlaylist] = useState([]);
+  const [playlistName, setPlaylistName] = useState(''); 
 
 
   useEffect(() => {
@@ -23,7 +27,7 @@ function App() {
   }, [profile]);
 
   async function login() {
-    const clientId = "b0b41f96952848a6a80957d528a0faa5";
+    const clientId = key;
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
 
@@ -36,6 +40,7 @@ function App() {
         const userProfile = await fetchProfile(accessToken);
         console.log("Fetched profile:", userProfile);
         setProfile(userProfile);
+        setUserId(userProfile.id); 
       } catch (error) {
         console.error("Error during login:", error);
       } finally {
@@ -57,7 +62,7 @@ function App() {
     params.append("client_id", clientId);
     params.append("response_type", "code");
     params.append("redirect_uri", "http://localhost:5173/callback");
-    params.append("scope", "user-read-private user-read-email");
+    params.append("scope", "user-read-private user-read-email playlist-modify-private playlist-modify-public playlist-read-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
 
@@ -124,8 +129,8 @@ function App() {
   return (
     <>
       <Header profile={profile} login={login} />
-      <SearchBarSong songs={songs} setSongs={setSongs} accessToken={accessToken} />c
-      <ListContainer songs={songs} />
+      <SearchBarSong songs={songs} setSongs={setSongs} accessToken={accessToken} />
+      <ListContainer songs={songs} playlist={playlist} setPlaylist={setPlaylist} playlistName={playlistName} setPlaylistName={setPlaylistName} userId={userId} accessToken={accessToken} />
       <PlayBar />
     </>
   )
