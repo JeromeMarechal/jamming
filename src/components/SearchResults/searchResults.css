@@ -39,14 +39,14 @@
     -ms-overflow-style: none;
 }
 
-.track-list {
+.track-list, .playlist-list {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 
-.info-track {
+.info-track, .playlist-info {
     display: flex;
     justify-content: center;
     align-items: center;

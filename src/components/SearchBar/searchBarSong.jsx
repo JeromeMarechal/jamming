@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react'; 
 import './searchBarSong.css';
 
-function SearchBarSong({ songs, setSongs, accessToken }) { 
+function SearchBarSong({ songs, setSongs, accessToken, setResultHeader, setUserPlaylists }) { 
     const [query, setQuery] = useState(''); 
 
     const handleChange = (e) => {
@@ -11,12 +11,15 @@ function SearchBarSong({ songs, setSongs, accessToken }) {
 
     const submitSearch = async (e) => {
         e.preventDefault(); 
+        setUserPlaylists([]);
         const searchResults = await fetchsongs(query);
         setSongs(searchResults.tracks.items.map(item => ({
+            id: item.id,
             name: item.name,
             artist: item.artists[0].name,
             album: item.album.name
         })));
+        setResultHeader('Search Results');
         console.log(songs); 
         setQuery(''); 
     }

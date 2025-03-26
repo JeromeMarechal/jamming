@@ -1,1 +1,1 @@
-In work, the import playlist, should we keep it as it is in the playlist or move it to the result container in order to display the playlist's items in the playlist container or even creating a temporary container for thus ??
+import playlist works, the next step is to correct the edit botton which so far doesn't open the playlist correctly, it seems the id playlist is not correctly passed. 

@@ -3,7 +3,7 @@ import { useState } from "react";
 import './playlist.css';
 import PlaylistButton from "../Buttons/playlistButon.jsx";
 
-function Playlist({ playlist, setPlaylist, playlistName, setPlaylistName, userId, accessToken }) {
+function Playlist({ playlist, setPlaylist, playlistName, setPlaylistName, userId, accessToken, setResultHeader, userPlaylists, setUserPlaylists, setSongs }) {
 
     const [importedPlaylist, setImportedPlaylist] = useState([]); 
 
@@ -49,9 +49,16 @@ function Playlist({ playlist, setPlaylist, playlistName, setPlaylistName, userId
         if (response.ok) {
             const data = await response.json(); 
             console.log('Playlist Imported:', data); 
+            setSongs([]); 
+            setUserPlaylists(data.items.map(item =>({
+                id: item.id,
+                name: item.name
+            }))); 
+            setResultHeader('Playlists');
         } else {
             const errorData = await response.json(); 
             console.error('Failed to import playlists:', response.status, response.statusText, errorData); 
+            setResultHeader('failed to moad playlists!!');
         }
     }
 
