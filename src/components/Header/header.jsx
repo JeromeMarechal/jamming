@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './header.css';
 
-const Header = ({ profile, setProfile, userId, setUserId, accessToken, setAccessToken }) => {
+const Header = ({ profile, setProfile, setUserId, accessToken, setAccessToken }) => {
 
     const key ="b0b41f96952848a6a80957d528a0faa5";
 

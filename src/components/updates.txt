@@ -1,1 +1,2 @@
-import playlist works, the next step is to correct the edit botton which so far doesn't open the playlist correctly, it seems the id playlist is not correctly passed. 
+In process : add function // add to array playlist ok BUT add to spotify playlist not yet.
+Next to create : the remove function // remove from array playlist ok BUT remove from the spotify playlist not yet.

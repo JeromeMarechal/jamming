@@ -4,7 +4,7 @@ import './listContainer.css';
 import SearchResults from '../SearchResults/searchResults.jsx';
 import Playlist from '../playlist/playlist.jsx';
 
-function ListContainer({ songs, setSongs,  playlist, setPlaylist, playlistName, setPlaylistName, userId, accessToken, resultHeader, setResultHeader, userPlaylists, setUserPlaylists }) { 
+function ListContainer({ songs, setSongs,  playlist, setPlaylist, playlistName, setPlaylistName, userId, accessToken, resultHeader, setResultHeader, userPlaylists, setUserPlaylists, playlistId, setPlaylistId }) { 
 
     return (
         <div className='list-container'>
@@ -15,6 +15,10 @@ function ListContainer({ songs, setSongs,  playlist, setPlaylist, playlistName, 
             resultHeader={resultHeader}
             userPlaylists={userPlaylists}
             accessToken={accessToken}
+            playlistName={playlistName}
+            setPlaylistName={setPlaylistName}
+            playlistId={playlistId}
+            setPlaylistId={setPlaylistId}
             />
 
             <Playlist 
@@ -28,6 +32,8 @@ function ListContainer({ songs, setSongs,  playlist, setPlaylist, playlistName, 
             userPlaylists={userPlaylists}
             setUserPlaylists={setUserPlaylists}
             setSongs={setSongs}
+            playlistId={playlistId}
+            setPlaylistId={setPlaylistId}
             />
         </div>
     )

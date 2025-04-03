@@ -2,9 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import './searchResults.css';
 import PlaylistButton from '../Buttons/playlistButon.jsx';
 
-function SearchResults({ songs, playlist, setPlaylist, resultHeader, userPlaylists, accessToken }) {
+function SearchResults({ songs, playlist, setPlaylist, resultHeader, userPlaylists, accessToken, playlistName, setPlaylistName, playlistId, setPlaylistId }) {
 
-    const addToPlaylist = (song) => {
+    const addToPlaylist = async (song, playlist_id, uri) => {
         const isInPlaylist = playlist.some(playlistSong => playlistSong.name === song.name && playlistSong.artist === song.artist);
 
         if (isInPlaylist) {
@@ -13,21 +13,54 @@ function SearchResults({ songs, playlist, setPlaylist, resultHeader, userPlaylis
                 return;
             }
         }
-
         setPlaylist(prevPlaylist => [...prevPlaylist, song]);
+
+        if (playlist_id) {
+            const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify({
+                    uris: [uri]
+                })
+            })
+
+            if (!response.ok) {
+                const errorData = await response.json(); 
+                console.log('Failed to add song to playlist:', response.status, response.statusText, errorData); 
+                alert('Failed to add song to playlist, please try again.'); 
+            }
+        }
     };
 
-    const editPlaylist = async (playlist_id) => {
-        const response = await fetch('https://api.spotify.com/v1/playlists/3cEYpjA9oz9GiPac4AsH4n/tracks', {
-            method: 'GET', 
+    const editPlaylist = async (playlist_id, playlist_name) => {
+        const response = await fetch(`https://api.spotify.com/v1/playlists/${playlist_id}/tracks`, {
+            method: 'GET',
             headers: {
-                Authorization:`Bearer ${accessToken}`
+                Authorization: `Bearer ${accessToken}`
             }
         });
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);  
+            console.log(data);
+            setPlaylistName(playlist_name);
+            setPlaylistId(playlist_id);
+            setPlaylist(data.items.map(item => ({
+                id: item.track.id,
+                name: item.track.name,
+                uri: item.track.uri,
+                artist: item.track.artists[0]?.name,
+                album: item.track.album.name
+            })));
+            console.log(playlistName);
+            console.log(playlist);
+        } else {
+            const errorData = await response.json();
+            console.log('Failed to Access Playlist details:', response.status, response.statusText, errorData);
+            alert("Failed to access playlist's details, please try again.");
         }
     }
 
@@ -43,7 +76,7 @@ function SearchResults({ songs, playlist, setPlaylist, resultHeader, userPlaylis
                             <p><strong>Artist:</strong> {song.artist}</p>
                             <p><strong>Song:</strong> {song.name}</p>
                             <p><strong>Album:</strong> {song.album}</p>
-                            <PlaylistButton onClick={() => addToPlaylist(song)} label='ADD' />
+                            <PlaylistButton onClick={() => addToPlaylist(song,playlistId, song.uri)} label='ADD' />
                         </div>
                     </div>
                 ))}
@@ -51,7 +84,7 @@ function SearchResults({ songs, playlist, setPlaylist, resultHeader, userPlaylis
                     <div className='playlist-list' key={playlist.id}>
                         <div className='playlist-info' >
                             <p>{playlist.name}</p>
-                            <PlaylistButton onClick={()=> editPlaylist(playlist.id)} label='EDIT' />
+                            <PlaylistButton onClick={() => editPlaylist(playlist.id, playlist.name)} label='EDIT' />
                         </div>
                     </div>
                 ))}

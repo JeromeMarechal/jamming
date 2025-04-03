@@ -16,13 +16,13 @@ function App() {
   const [playlist, setPlaylist] = useState([]);
   const [playlistName, setPlaylistName] = useState(''); 
   const [userPlaylists, setUserPlaylists] = useState([]); 
+  const [playlistId, setPlaylistId] = useState(''); 
 
   return (
     <>
       <Header 
       profile={profile} 
       setProfile={setProfile} 
-      userId={userId}
       setUserId={setUserId} 
       accessToken={accessToken}
       setAccessToken={setAccessToken} 
@@ -49,6 +49,8 @@ function App() {
       setResultHeader={setResultHeader}
       userPlaylists={userPlaylists}
       setUserPlaylists={setUserPlaylists}
+      playlistId={playlistId}
+      setPlaylistId={setPlaylistId}
       />
       <PlayBar />
     </>
